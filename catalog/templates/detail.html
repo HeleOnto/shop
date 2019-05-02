@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}
+View detail on product
+{% endblock %}
+{% block content %}
+<h2>{{ product.name }}</h2>
+<br>
+<img src="/catalog/img/{{ product.photo }}" alt="{{ product.name }}" width="300">
+<br><p>{{ product.description|linebreaksbr }}</p>
+<h3>{{ product.price }} &euro;</h3><button><h2><a href="/catalog/order/item-added/{{ product_id }}">Add to cart</a></h2></button>
+{% endblock %}

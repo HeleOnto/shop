@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %} Product List {% endblock %}
+{% block content %}
+    {% if products %}
+    <ul>
+    {% for product in products %}
+        <li><a href="{% url 'catalog:detail' product.category.id product.id %}">
+            <img src="/catalog/img/{{ product.photo }}" alt="{{ product.name }}" width="300"></a>
+            <br>
+            <a href="{% url 'catalog:detail' product.category.id product.id %}">{{ product.name }}</a>
+            manufactured by {{ product.manufacturer.name }} <strong>{{ product.price }} &euro;</strong>
+             -- {{ product.category.name }}<br></li>
+    {% endfor %}
+    </ul>
+    {% else %}
+        <p>No products are available.</p>
+    {% endif %}
+{% endblock %}

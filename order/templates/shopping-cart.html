@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Shopping Cart
+{% endblock %}
+
+{% block content %}
+<h1>Here is your shopping cart so far</h1>
+
+
+{% if products %}
+    {% for product in products %}
+        <li>
+            <a href="{% url 'catalog:detail' product.category.id product.id %}">
+                <img src="/catalog/img/{{ product.photo }}" alt="{{ product.name }}" width="300">
+            </a>
+            <br>
+            <a href="{% url 'catalog:detail' product.category.id product.id %}">{{ product.name }}</a>
+            manufactured by {{ product.manufacturer.name }}
+            <strong>{{ product.price }} &euro;</strong>
+            -- {{ product.category.name }}
+            <br>
+            <button><h2><a href="{% url 'catalog:order:item-deleted' product.id %}">Remove item from cart</a></h2></button>
+        </li>
+    {% endfor %}
+<h2>Total: {{ total }} &euro;</h2>
+
+<h3>To procceed to checkout give us your email:</h3>
+<form action="/catalog/order/" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+    </form>
+
+{% else %}
+    You don't have any items yet
+{% endif %}
+
+{% endblock %}

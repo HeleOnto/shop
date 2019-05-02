@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %} All Products For Men {% endblock %}
+{% block content %}
+    {% if products %}
+    <ul>
+    {% for product in products %}
+        <li><br><img src="/catalog/img/{{ product.photo }}" alt="{{ product.name }}" width="300"> <br>
+            <a href="{% url 'catalog:detail' product.category.id product.id %}">{{ product.name }}</a>
+            manufactured by {{ product.manufacturer.name }}  <strong>{{ product.price }} &euro;</strong><br></li>
+    {% endfor %}
+    </ul>
+    {% else %}
+        <p>No products are available.</p>
+    {% endif %}
+{% endblock %}

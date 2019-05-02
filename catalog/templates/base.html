@@ -1,0 +1,27 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} Welcome {% endblock %}</title>
+    <link rel="stylesheet"  type="text/css" href="{% static 'css/style.css' %}">
+
+</head>
+<body>
+<div class="nav-container">
+	<nav>
+  <ul>
+  	  <li><a href="{% url 'catalog:product_list' %}">All Products</a></li>
+      {% for category in categories %}
+      <li><a href="{% url 'catalog:sort-by-category' category.id %}">{{ category.name }}</a></li>
+      {% endfor %}
+  </ul>
+</nav>
+    <div style="border: 3px solid green;"><a href="{% url 'catalog:order:shopping-cart' %}">My cart</a></div>
+</div>
+<div class="main-container">
+    {% block content %}
+
+    {% endblock %}
+</div>
+</body>
+</html>
